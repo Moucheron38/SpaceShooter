@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class EMissileCol : MonoBehaviour
 {
+    [Tooltip("Liste contenant les tags avec lesquels la collision aura lieu")] 
+    [SerializeField] List<string> tags;
     public float speed;
 
     void Start()
@@ -13,24 +15,14 @@ public class EMissileCol : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D col)
     {
-
-        if (col.gameObject.CompareTag("Player"))
+        foreach(string tag in tags)
         {
-
-            Destroy(this.gameObject);
-
-
-
-
-
+            if (col.gameObject.CompareTag(tag))
+            {
+                gameObject.SetActive(false);
+                break;
+            }
         }
-
-        if (col.gameObject.CompareTag("Box"))
-        {
-
-            Destroy(this.gameObject);
-        }
-
 
 
     }

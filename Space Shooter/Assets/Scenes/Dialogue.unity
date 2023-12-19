@@ -614,10 +614,6 @@ MonoBehaviour:
   - 'Charlie : ...'
   - 'Charlie : Tu es tout seul sur ce coup !'
   - "Alpha-1 : Pas de probl\xE8me."
-  - 
-  - 
-  - 
-  - 
   textSpeed: 0.05
 --- !u!114 &711462096
 MonoBehaviour:

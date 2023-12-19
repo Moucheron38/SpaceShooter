@@ -95,7 +95,7 @@ GameObject:
   - component: {fileID: 2804021424750227257}
   - component: {fileID: 4152969684368302510}
   - component: {fileID: 5091356843502216793}
-  - component: {fileID: 6503983654588657691}
+  - component: {fileID: 164767601760555889}
   m_Layer: 0
   m_Name: Missile
   m_TagString: Player
@@ -181,7 +181,7 @@ CapsuleCollider2D:
   m_Offset: {x: 0.013222575, y: 0.092558384}
   m_Size: {x: 0.3148837, y: 0.6033211}
   m_Direction: 0
---- !u!114 &6503983654588657691
+--- !u!114 &164767601760555889
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -190,7 +190,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 3937686520110862486}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9fa39ce645f3adc46ae373561568facd, type: 3}
+  m_Script: {fileID: 11500000, guid: 06d0550ea8f66b941b10409080573376, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  tags:
+  - Box
+  - Enemy
   speed: 0

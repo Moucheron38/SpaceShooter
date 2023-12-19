@@ -109,6 +109,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 06d0550ea8f66b941b10409080573376, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  tags:
+  - Player
+  - Box
   speed: 0
 --- !u!1 &6631641467750069423
 GameObject:
