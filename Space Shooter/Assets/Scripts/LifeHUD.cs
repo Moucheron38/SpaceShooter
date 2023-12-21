@@ -16,18 +16,30 @@ public class LifeHUD : MonoBehaviour
         CreateIcons();
     }
 
+    private void Update()
+    {
+        
+    }
+
     public static void UpdateHUD()
     {
         int life = GameManager.LIFE;
-        Debug.Log("Life ="+life);
+        instance.transform.DetachChildren();
+        instance.CreateIcons();
+
     }
 
     void CreateIcons()
-    {
+    { 
         for(int i = 0; i < GameManager.LIFE; i++)
         {
             GameObject inst = Instantiate(lifePrefab);
             inst.transform.SetParent(this.transform);
+
+           
         }
     }
+
+    
+        
 }

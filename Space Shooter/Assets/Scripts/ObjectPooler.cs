@@ -1,66 +1,62 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Drawing;
 using UnityEngine;
 
 public class ObjectPooler : MonoBehaviour
 {
     public static ObjectPooler instance;
-   
+
     public Dictionary<GameObject, List<GameObject>> dico;
 
-    
+
     void Awake()
     {
         dico = new Dictionary<GameObject, List<GameObject>>();
         instance = this;
     }
 
-  
-
-    private List<GameObject> GetInstanceList(GameObject Prefab)
+    public static GameObject GetInstance(GameObject prefab)
     {
-        List<GameObject> TempList;
-        dico.TryGetValue(Prefab, out TempList);
+        List<GameObject> tempList = instance.GetInstanceList(prefab);
 
-        return TempList;
-    }
-
-    public static GameObject GetInstance(GameObject Prefab)
-    {
-        List<GameObject> TempList = instance.GetInstanceList(Prefab);
-
-        if (TempList == null)
-        {
-           TempList = new List<GameObject>();
-            instance.dico.Add(Prefab, TempList);
-        }
-
-        GameObject GOinst = instance.TryGetInstance(Prefab);
-
-        if (GOinst == null)
-        {
-            GOinst = Instantiate(Prefab);
-            GOinst.SetActive(false);
-            TempList.Add(GOinst);
-        }
-
-     
+        GameObject GOinst = instance.GetUseablePrefabInstance(prefab, tempList);
 
         GOinst.SetActive(true);
+
         return GOinst;
     }
 
-    private GameObject TryGetInstance(GameObject Prefab)
+
+    private List<GameObject> GetInstanceList(GameObject prefab)
     {
-        List<GameObject> TempList;
-        dico.TryGetValue(Prefab, out TempList);
-        foreach(var GO in TempList)
+        List<GameObject> _tempList;
+        dico.TryGetValue(prefab, out _tempList);
+
+        if (_tempList == null)
+        {
+            _tempList = new List<GameObject>();
+            instance.dico.Add(prefab, _tempList);
+        }
+
+        return _tempList;
+    }
+
+
+    private GameObject GetUseablePrefabInstance(GameObject prefab, List<GameObject> _instancesList)
+    {
+        foreach (var GO in _instancesList)
         {
             if (GO.activeSelf) continue;
 
             return GO;
-            
         }
-        return null;
+
+
+        GameObject GOinst = Instantiate(prefab);
+        _instancesList.Add(GOinst);
+        GOinst.SetActive(false);
+
+        return GOinst;
     }
 }

@@ -41,7 +41,9 @@ public class EnnemyShoot : MonoBehaviour
 
     void shoot()
     {
-        GameObject missileLaunched = Instantiate(Missile, startPos.position, Quaternion.identity);
+        GameObject missileLaunched = ObjectPooler.GetInstance(Missile);
+        missileLaunched.transform.position = startPos.position;
+        missileLaunched.transform.rotation = Quaternion.identity;
         Rigidbody2D rb2 = missileLaunched.GetComponent<Rigidbody2D>();
         rb2.AddForce(vitesse);
 

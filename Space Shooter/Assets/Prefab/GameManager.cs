@@ -1,24 +1,28 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
     public static GameManager instance;
     [SerializeField] private int life;
 
-    [SerializeField]
-
-    private bool isGameOn;
 
     [SerializeField]
 
     private GameObject GameOverGO;
 
+    [SerializeField]
+
+    private GameObject WinPanel;
+
+
+
     void Start()
 
     {
-        isGameOn = true;
+        
         GameOverGO.SetActive(false);
     }
 
@@ -46,31 +50,46 @@ public class GameManager : MonoBehaviour
     public void TakeDamage(int _damage)
     {
         life -= _damage;
+        
     }
 
     public static void launchGameOver()
     {
-        instance.isGameOn = false;
+        Time.timeScale = 0f;
         instance.GameOverGO.SetActive(true);
 
-        //Stopthegame
-        Debug.Log("GameOver");
+       
     }
 
-    public static void launchRestart()
+    public void LoadMenu()
     {
-        instance.isGameOn = true;
-        instance.GameOverGO.SetActive(false);
-        instance.GetComponent<PlayerControler>().enabled = true;
+        Time.timeScale = 1f;
+        SceneManager.LoadScene("Menu");
 
-        //Restart
-        Debug.Log("Restart");
     }
 
-    public void OnRestart()
+    public void LoadRestart()
     {
-        launchRestart();
+        Time.timeScale = 1f;
+        SceneManager.LoadScene("Jeu");
+
     }
+
+
+
+    private void Update()
+    {
+        GameObject[] enemy = GameObject.FindGameObjectsWithTag("Enemy");
+        if (enemy == null || enemy.Length == 0)
+        {
+            WinPanel.SetActive(true);
+            
+
+        }
+    }
+
+
+
 
 
 }
